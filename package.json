@@ -1,0 +1,23 @@
+{
+	"name": "contrast-arrays",
+	"description": "Synchronization current array by target array",
+	"version": "1.0.0",
+	"author": {
+		"name": "Essle Jaxcate",
+		"email": "me@essle.ru",
+		"url": "https://essle.ru/"
+	},
+	"keywords": [
+		"array",
+		"synchronization",
+		"compare",
+		"source"
+	],
+	"license": "MIT",
+	"main": "index.js",
+	"homepage": "https://github.com/essle/source-array#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/essle/source-array.git"
+	}
+}
