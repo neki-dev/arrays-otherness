@@ -31,13 +31,21 @@ contrast(
     (itemT, itemC) => (itemT.id === itemC.id)
 ).match((itemT, itemC) => {
     // If items in two arrays
-    // itemT.id = 32
-    // itemT.id = 33 
+    console.log('matched =', itemT.id);
 }).missing((itemT) => {
     // If target item missing in current array
-    // itemT.id = 41
+    console.log('to create =', itemT.id);
 }).excess((itemC) => {
     // If current item is extra in target array
-    // itemC.id = 31
+    console.log('to delele =', itemC.id);
 });
+
+/* Output:
+
+matched = 32
+matched = 33
+to create = 41
+to delele = 31
+
+*/
 ```
