@@ -20,8 +20,7 @@ type Result<T> = {
 type MatchCallback = (targetItem: any, currentItem: any) => boolean;
 
 /**
- * Getting and handle matching, missing and exess items of
- * an current array based on target array
+ * Get a matching, missing and excess items of an array based on target array
  *
  * @param {Array} current - Current array
  * @param {Array} target - Target array
