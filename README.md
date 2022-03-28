@@ -26,30 +26,21 @@ const targetArray = [
     {a: 20, b: 'b3', id: 33},
 ];
 
-contrast(
-    currentArray, 
-    targetArray,
-    // Function of matching arrays items
-    (itemT, itemC) => (itemT.id === itemC.id)
-).match((itemT, itemC) => {
-    // If items in two arrays
-    console.log('matched =', itemT.id);
-}).missing((itemT) => {
-    // If target item missing in current array
-    console.log('to create =', itemT.id);
-}).excess((itemC) => {
-    // If current item is extra in target array
-    console.log('to delele =', itemC.id);
-});
+// Function of matching arrays items
+const matchFn = (targetItem, currentItem) => 
+    (targetItem.id === currentItem.id);
 
-/* 
-
-Output:
-
-  matched = 32
-  matched = 33
-  to create = 41
-  to delele = 31
-
-*/
+contrast(currentArray, targetArray, matchFn)
+    .match((targetItem, currentItem) => {
+        // If items in two arrays
+        console.log('matched =', targetItem.id);
+    })
+    .missing((targetItem) => {
+        // If target item missing in current array
+        console.log('to create =', targetItem.id);
+    })
+    .excess((currentItem) => {
+        // If current item is excess in target array
+        console.log('to delele =', currentItem.id);
+    });
 ```
