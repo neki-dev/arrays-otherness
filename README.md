@@ -1,4 +1,6 @@
 ## Arrays otherness
+[![Npm package version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
+[![Only 32 Kb](https://badge-size.herokuapp.com/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
 
 Getting and handle matching, missing and exess items of an current array based on target array
 

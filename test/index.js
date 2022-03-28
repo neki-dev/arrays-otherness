@@ -1,5 +1,5 @@
 const assert = require('assert');
-const otherness = require('..');
+const otherness = require('../dist');
 
 describe('arrays otherness', () => {
   let sync;
