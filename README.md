@@ -1,4 +1,6 @@
 ## Synchronization current array by target array
+Allows to get matching, missing and exess items of an current array based on target array
+
 .
 
 * ### Install
@@ -40,12 +42,14 @@ contrast(
     console.log('to delele =', itemC.id);
 });
 
-/* Output:
+/* 
 
-matched = 32
-matched = 33
-to create = 41
-to delele = 31
+Output:
+
+  matched = 32
+  matched = 33
+  to create = 41
+  to delele = 31
 
 */
 ```

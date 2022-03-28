@@ -20,12 +20,5 @@
 	},
 	"devDependencies": {
 		"@neki-dev/eslint-config": "github:neki-dev/eslint-config"
-	},
-	"repository": {
-	  "type": "git",
-	  "url": "https://github.com/neki-dev/contrast-arrays.git"
-	},
-	"publishConfig": {
-	  "registry": "https://npm.pkg.github.com/neki-dev"
 	}
 }
