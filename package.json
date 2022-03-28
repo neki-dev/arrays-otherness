@@ -1,23 +1,31 @@
 {
 	"name": "contrast-arrays",
 	"description": "Synchronization current array by target array",
-	"version": "1.0.0",
-	"author": {
-		"name": "Essle Jaxcate",
-		"email": "me@essle.ru",
-		"url": "https://essle.ru/"
-	},
+	"version": "1.0.1",
 	"keywords": [
-		"array",
 		"synchronization",
+		"arrays",
 		"compare",
-		"source"
+		"difference"
 	],
 	"license": "MIT",
+	"author": {
+		"name": "Nikita Galadiy",
+		"email": "dev@neki.guru",
+		"url": "https://neki.guru/"
+	},
 	"main": "index.js",
-	"homepage": "https://github.com/essle/source-array#readme",
+	"scripts": {
+		"lint": "eslint index.js --fix"
+	},
+	"devDependencies": {
+		"@neki-dev/eslint-config": "github:neki-dev/eslint-config"
+	},
 	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/essle/source-array.git"
+	  "type": "git",
+	  "url": "https://github.com/neki-dev/contrast-arrays.git"
+	},
+	"publishConfig": {
+	  "registry": "https://npm.pkg.github.com/neki-dev"
 	}
 }
