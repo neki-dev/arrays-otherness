@@ -1,5 +1,5 @@
 {
-	"name": "contrast-arrays",
+	"name": "arrays-otherness",
 	"description": "Synchronization current array by target array",
 	"version": "1.0.1",
 	"keywords": [
@@ -16,9 +16,11 @@
 	},
 	"main": "index.js",
 	"scripts": {
-		"lint": "eslint index.js --fix"
+		"lint": "eslint ./ --ext .js --fix",
+		"test": "mocha"
 	},
 	"devDependencies": {
-		"@neki-dev/eslint-config": "github:neki-dev/eslint-config"
+		"@neki-dev/eslint-config": "github:neki-dev/eslint-config",
+		"mocha": "^9.2.2"
 	}
 }

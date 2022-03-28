@@ -1,36 +1,38 @@
-## Synchronization current array by target array
-Allows to get matching, missing and exess items of an current array based on target array
+## Arrays otherness
+
+Getting and handle matching, missing and exess items of an current array based on target array
 
 .
 
 * ### Install
 
 ```sh
-npm i contrast-arrays
+npm i arrays-otherness
 ```
 
 * ### Usage
 
 ```js
-const contrast = require('contrast-arrays');
+const otherness = require('arrays-otherness');
 
 const currentArray = [
-    {a: 10, b: 'm1', id: 31},
-    {a: 10, b: 'b2', id: 32},
-    {a: 10, b: 'c3', id: 33},
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Sam' },
+    { id: 3, name: 'Nick' },
 ];
 
 const targetArray = [
-    {a: 20, b: 'n1', id: 41},
-    {a: 20, b: 'b2', id: 32},
-    {a: 20, b: 'b3', id: 33},
+    { id: 1, name: 'Jonny' },
+    { id: 3, name: 'Nick' },
+    { id: 4, name: 'Lisa' },
+    { id: 5, name: 'Frank' },
 ];
 
 // Function of matching arrays items
 const matchFn = (targetItem, currentItem) => 
     (targetItem.id === currentItem.id);
 
-contrast(currentArray, targetArray, matchFn)
+otherness(currentArray, targetArray, matchFn)
     .match((targetItem, currentItem) => {
         // If items in two arrays
         console.log('matched =', targetItem.id);
