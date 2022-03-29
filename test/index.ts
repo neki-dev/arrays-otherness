@@ -1,34 +1,39 @@
-const assert = require('assert');
-const otherness = require('../dist');
+import assert from 'assert';
+import otherness, { ResultHandlers } from '../src';
+
+type TestItem = {
+  id: number
+  name: string
+};
 
 describe('arrays otherness', () => {
-  let sync;
+  let sync: ResultHandlers<TestItem>;
 
   before(() => {
-    const currentArray = [
+    const currentArray: TestItem[] = [
       { id: 1, name: 'John' },
       { id: 2, name: 'Sam' },
       { id: 3, name: 'Nick' },
     ];
 
-    const targetArray = [
+    const targetArray: TestItem[] = [
       { id: 1, name: 'Jonny' },
       { id: 3, name: 'Nick' },
       { id: 4, name: 'Lisa' },
       { id: 5, name: 'Frank' },
     ];
 
-    sync = otherness(
+    sync = otherness<TestItem>(
       currentArray,
       targetArray,
-      (targetItem, currentItem) => (targetItem.id === currentItem.id),
+      (current, target) => (current.id === target.id),
     );
   });
 
   it('should return exess items', () => {
-    const result = [];
-    sync.excess((currentItem) => {
-      result.push(currentItem);
+    const result: TestItem[] = [];
+    sync.excess(({ current }) => {
+      result.push(current);
     });
 
     assert.equal(result.length, 1);
@@ -36,9 +41,9 @@ describe('arrays otherness', () => {
   });
 
   it('should return match items', () => {
-    const result = [];
-    sync.match((targetItem, currentItem) => {
-      result.push(currentItem);
+    const result: TestItem[] = [];
+    sync.match(({ current }) => {
+      result.push(current);
     });
 
     assert.equal(result.length, 2);
@@ -47,9 +52,9 @@ describe('arrays otherness', () => {
   });
 
   it('should return missing items', () => {
-    const result = [];
-    sync.missing((targetItem) => {
-      result.push(targetItem);
+    const result: TestItem[] = [];
+    sync.missing(({ target }) => {
+      result.push(target);
     });
 
     assert.equal(result.length, 2);
