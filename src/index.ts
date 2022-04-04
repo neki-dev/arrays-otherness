@@ -1,9 +1,11 @@
-export type ResultItems<T> = {
+type ResultItems<T> = {
   target?: T
   current?: T
 };
 
 type ResultCallback<T> = (items: ResultItems<T>) => void;
+
+type MatchCallback<T> = (items: ResultItems<T>) => boolean;
 
 export type ResultHandlers<T> = {
   excess: (callback: ResultCallback<T>) => void
@@ -17,8 +19,6 @@ type Result<T> = {
   missing: ResultItems<T>[]
 };
 
-export type MatchCallback<T> = (targetItem: T, currentItem: T) => boolean;
-
 /**
  * Get a matching, missing and excess items of an array based on target array
  *
@@ -28,9 +28,9 @@ export type MatchCallback<T> = (targetItem: T, currentItem: T) => boolean;
  *
  * @returns {ResultHandlers}
  */
-export default function otherness<T = any>(
-  current: any[],
-  target: any[],
+function arraysOtherness<T = any>(
+  current: T[],
+  target: T[],
   matchFn: MatchCallback<T>,
 ): ResultHandlers<T> {
   const result: Result<T> = {
@@ -40,7 +40,9 @@ export default function otherness<T = any>(
   };
 
   current.forEach((currentItem: T) => {
-    if (target.every((targetItem: T) => !matchFn(targetItem, currentItem))) {
+    if (target.every((targetItem: T) => (
+      !matchFn({ target: targetItem, current: currentItem })
+    ))) {
       result.excess.push({
         current: currentItem,
       });
@@ -48,7 +50,9 @@ export default function otherness<T = any>(
   });
 
   target.forEach((targetItem: T) => {
-    const sameItem = current.find((currentItem: T) => matchFn(targetItem, currentItem));
+    const sameItem = current.find((currentItem: T) => (
+      matchFn({ target: targetItem, current: currentItem })
+    ));
     if (sameItem) {
       result.match.push({
         current: sameItem,
@@ -71,3 +75,7 @@ export default function otherness<T = any>(
 
   return api;
 }
+
+// export for commonjs
+// @ts-ignore
+export = arraysOtherness;

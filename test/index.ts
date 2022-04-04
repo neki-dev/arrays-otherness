@@ -26,7 +26,7 @@ describe('arrays otherness', () => {
     sync = otherness<TestItem>(
       currentArray,
       targetArray,
-      (current, target) => (current.id === target.id),
+      ({ current, target }) => (current.id === target.id),
     );
   });
 

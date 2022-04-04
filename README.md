@@ -1,6 +1,6 @@
 ## Arrays otherness
 [![Npm package version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
-[![Only 32 Kb](https://badge-size.herokuapp.com/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
+[![Small size](https://badge-size.herokuapp.com/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
 
 Get and handle a matching, missing and excess items of an array based on target array
 
@@ -15,7 +15,27 @@ npm i arrays-otherness
 * ### Usage
 
 ```js
-const otherness = require('arrays-otherness');
+arraysOtherness<T>(
+    // Array for checking
+    currentArray: T[], 
+    // Etalon array
+    targetArray: T[], 
+    // Function of matching arrays items
+    matchFn: (res) => boolean
+): {
+    // Execute callback if items in two arrays
+    match: (callback: (res) => void) => this,
+    // Execute callback if target item missing in current array
+    missing: (callback: (res) => void) => this,
+    // Execute callback if current item is excess in target array
+    excess: (callback: (res) => void) => this,
+}
+```
+
+* ### Example
+
+```js
+const arraysOtherness = require('arrays-otherness');
 
 const currentArray = [
     { id: 1, name: 'John' },
@@ -30,21 +50,14 @@ const targetArray = [
     { id: 5, name: 'Frank' },
 ];
 
-// Function of matching arrays items
-const matchFn = (targetItem, currentItem) => 
-    (targetItem.id === currentItem.id);
-
-otherness(currentArray, targetArray, matchFn)
-    .match((targetItem, currentItem) => {
-        // If items in two arrays
-        console.log('matched =', targetItem.id);
+arraysOtherness(currentArray, targetArray, ({ current, target }) => (current.id === target.id))
+    .match(({ target, current }) => {
+        console.log('matched =', target, 'and', current);
     })
-    .missing((targetItem) => {
-        // If target item missing in current array
-        console.log('to create =', targetItem.id);
+    .missing(({ target }) => {
+        console.log('to create =', target);
     })
-    .excess((currentItem) => {
-        // If current item is excess in target array
-        console.log('to delele =', currentItem.id);
+    .excess(({ current }) => {
+        console.log('to delele =', current);
     });
 ```

@@ -1,7 +1,7 @@
 {
   "name": "arrays-otherness",
   "description": "Get a matching, missing and excess items of an array based on target array",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "keywords": [
     "arrays",
     "compare",
@@ -15,7 +15,7 @@
   },
   "main": "./dist/index.js",
   "scripts": {
-    "lint": "eslint ./src ./test --ext .ts --fix",
+    "lint": "eslint ./src ./test --fix",
     "test": "ts-mocha ./test/*.ts",
     "build": "gulp"
   },

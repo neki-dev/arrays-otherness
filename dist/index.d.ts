@@ -1,14 +1,14 @@
-export declare type ResultItems<T> = {
+declare type ResultItems<T> = {
     target?: T;
     current?: T;
 };
 declare type ResultCallback<T> = (items: ResultItems<T>) => void;
+declare type MatchCallback<T> = (items: ResultItems<T>) => boolean;
 export declare type ResultHandlers<T> = {
     excess: (callback: ResultCallback<T>) => void;
     match: (callback: ResultCallback<T>) => void;
     missing: (callback: ResultCallback<T>) => void;
 };
-export declare type MatchCallback<T> = (targetItem: T, currentItem: T) => boolean;
 /**
  * Get a matching, missing and excess items of an array based on target array
  *
@@ -18,5 +18,5 @@ export declare type MatchCallback<T> = (targetItem: T, currentItem: T) => boolea
  *
  * @returns {ResultHandlers}
  */
-export default function otherness<T = any>(current: any[], target: any[], matchFn: MatchCallback<T>): ResultHandlers<T>;
-export {};
+declare function arraysOtherness<T = any>(current: T[], target: T[], matchFn: MatchCallback<T>): ResultHandlers<T>;
+export = arraysOtherness;
