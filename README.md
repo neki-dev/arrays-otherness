@@ -1,7 +1,7 @@
 ## Arrays otherness
 [![Npm package version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
 [![Small size](https://badge-size.herokuapp.com/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
-![Building](https://github.com/neki-dev/arrays-otherness/actions/workflows/npm.yml/badge.svg)
+[![Building](https://github.com/neki-dev/arrays-otherness/actions/workflows/npm.yml/badge.svg)](https://github.com/neki-dev/arrays-otherness/actions)
 
 Get and handle a matching, missing and excess items of an array based on target array
 
