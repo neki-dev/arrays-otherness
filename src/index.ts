@@ -1,23 +1,4 @@
-type ResultItems<T> = {
-  target?: T
-  current?: T
-};
-
-type ResultCallback<T> = (items: ResultItems<T>) => void;
-
-type MatchCallback<T> = (items: ResultItems<T>) => boolean;
-
-export type ResultHandlers<T> = {
-  excess: (callback: ResultCallback<T>) => void
-  match: (callback: ResultCallback<T>) => void
-  missing: (callback: ResultCallback<T>) => void
-};
-
-type Result<T> = {
-  excess: ResultItems<T>[]
-  match: ResultItems<T>[]
-  missing: ResultItems<T>[]
-};
+import { MatchCallback, Result, ResultCallback, ResultHandlers } from "./types";
 
 /**
  * Get a matching, missing and excess items of an array based on target array
@@ -28,7 +9,7 @@ type Result<T> = {
  *
  * @returns {ResultHandlers}
  */
-function arraysOtherness<T = any>(
+export default function arraysOtherness<T = any>(
   current: T[],
   target: T[],
   matchFn: MatchCallback<T>,
@@ -76,6 +57,4 @@ function arraysOtherness<T = any>(
   return api;
 }
 
-// export for commonjs
-// @ts-ignore
-export = arraysOtherness;
+export * from './types'

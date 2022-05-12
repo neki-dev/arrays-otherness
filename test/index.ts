@@ -1,5 +1,5 @@
 import assert from 'assert';
-import otherness, { ResultHandlers } from '../src';
+import otherness, { ResultHandlers } from '../dist';
 
 type TestItem = {
   id: number
