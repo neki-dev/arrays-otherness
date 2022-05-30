@@ -50,8 +50,8 @@ export default function arraysOtherness<T = any>(
 
   const api = Object.keys(result).reduce((curr, type: keyof Result<T>) => ({
     ...curr,
-    [type]: async (callback: ResultCallback<T>): Promise<ResultHandlers<T>> => {
-      await Promise.all(result[type].map(callback));
+    [type]: (callback: ResultCallback<T>): ResultHandlers<T> => {
+      Promise.all(result[type].map(callback));
       return api;
     },
   }), {} as ResultHandlers<T>);

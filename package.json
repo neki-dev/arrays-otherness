@@ -1,7 +1,7 @@
 {
   "name": "arrays-otherness",
   "description": "Get a matching, missing and excess items of an array based on target array",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "keywords": [
     "arrays",
     "compare",
