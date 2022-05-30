@@ -8,9 +8,9 @@ export type ResultCallback<T> = (items: ResultItems<T>) => void;
 export type MatchCallback<T> = (items: ResultItems<T>) => boolean;
 
 export type ResultHandlers<T> = {
-  excess: (callback: ResultCallback<T>) => void
-  match: (callback: ResultCallback<T>) => void
-  missing: (callback: ResultCallback<T>) => void
+  excess: (callback: ResultCallback<T>) => ResultHandlers<T>
+  match: (callback: ResultCallback<T>) => ResultHandlers<T>
+  missing: (callback: ResultCallback<T>) => ResultHandlers<T>
 };
 
 export type Result<T> = {

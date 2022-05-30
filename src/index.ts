@@ -5,14 +5,14 @@ import { MatchCallback, Result, ResultCallback, ResultHandlers } from "./types";
  *
  * @param {Array} current - Current array
  * @param {Array} target - Target array
- * @param {MatchCallback} matchFn - Function of matching arrays items
+ * @param {MatchCallback?} matchFn - Function of matching arrays items
  *
  * @returns {ResultHandlers}
  */
 export default function arraysOtherness<T = any>(
   current: T[],
   target: T[],
-  matchFn: MatchCallback<T>,
+  matchFn?: MatchCallback<T>,
 ): ResultHandlers<T> {
   const result: Result<T> = {
     excess: [],
@@ -20,9 +20,11 @@ export default function arraysOtherness<T = any>(
     missing: [],
   };
 
+  const match = matchFn || (({ target, current }) => (target === current));
+
   current.forEach((currentItem: T) => {
     if (target.every((targetItem: T) => (
-      !matchFn({ target: targetItem, current: currentItem })
+      !match({ target: targetItem, current: currentItem })
     ))) {
       result.excess.push({
         current: currentItem,
@@ -32,7 +34,7 @@ export default function arraysOtherness<T = any>(
 
   target.forEach((targetItem: T) => {
     const sameItem = current.find((currentItem: T) => (
-      matchFn({ target: targetItem, current: currentItem })
+      match({ target: targetItem, current: currentItem })
     ));
     if (sameItem) {
       result.match.push({

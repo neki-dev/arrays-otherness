@@ -5,9 +5,9 @@ export declare type ResultItems<T> = {
 export declare type ResultCallback<T> = (items: ResultItems<T>) => void;
 export declare type MatchCallback<T> = (items: ResultItems<T>) => boolean;
 export declare type ResultHandlers<T> = {
-    excess: (callback: ResultCallback<T>) => void;
-    match: (callback: ResultCallback<T>) => void;
-    missing: (callback: ResultCallback<T>) => void;
+    excess: (callback: ResultCallback<T>) => ResultHandlers<T>;
+    match: (callback: ResultCallback<T>) => ResultHandlers<T>;
+    missing: (callback: ResultCallback<T>) => ResultHandlers<T>;
 };
 export declare type Result<T> = {
     excess: ResultItems<T>[];
