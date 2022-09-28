@@ -1,4 +1,6 @@
-import { MatchCallback, Result, ResultCallback, ResultHandlers } from "./types";
+import {
+  MatchCallback, Result, ResultCallback, ResultHandlers, ResultItems,
+} from './types';
 
 /**
  * Get a matching, missing and excess items of an array based on target array
@@ -20,7 +22,8 @@ export default function arraysOtherness<T = any>(
     missing: [],
   };
 
-  const match = matchFn || (({ target, current }) => (target === current));
+  const defaultMathFn = (item: ResultItems<T>) => (item.target === item.current);
+  const match = matchFn || defaultMathFn;
 
   current.forEach((currentItem: T) => {
     if (target.every((targetItem: T) => (
@@ -59,4 +62,4 @@ export default function arraysOtherness<T = any>(
   return api;
 }
 
-export * from './types'
+export * from './types';
