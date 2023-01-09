@@ -1,6 +1,6 @@
-## Arrays otherness
+## ⚡ Arrays otherness
 [![Npm package version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
-[![Small size](https://badge-size.herokuapp.com/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
+[![Small size](https://img.badgesize.io/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
 [![Testing](https://github.com/neki-dev/arrays-otherness/actions/workflows/test.yml/badge.svg)](https://github.com/neki-dev/arrays-otherness/actions/workflows/test.yml)
 [![Building](https://github.com/neki-dev/arrays-otherness/actions/workflows/build.yml/badge.svg)](https://github.com/neki-dev/arrays-otherness/actions/workflows/build.yml)
 

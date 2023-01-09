@@ -1,4 +1,4 @@
-import { MatchCallback, ResultHandlers } from "./types";
+import { MatchCallback, ResultHandlers } from './types';
 /**
  * Get a matching, missing and excess items of an array based on target array
  *
