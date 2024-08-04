@@ -1,5 +1,5 @@
 ## ⚡ Arrays otherness
-[![Npm package version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
+[![Version](https://badgen.net/npm/v/arrays-otherness)](https://npmjs.com/package/arrays-otherness)
 [![Small size](https://img.badgesize.io/neki-dev/arrays-otherness/master/dist/index.js)](https://github.com/neki-dev/arrays-otherness/blob/master/dist/index.js)
 [![Testing](https://github.com/neki-dev/arrays-otherness/actions/workflows/test.yml/badge.svg)](https://github.com/neki-dev/arrays-otherness/actions/workflows/test.yml)
 [![Building](https://github.com/neki-dev/arrays-otherness/actions/workflows/build.yml/badge.svg)](https://github.com/neki-dev/arrays-otherness/actions/workflows/build.yml)
@@ -19,7 +19,7 @@ npm i arrays-otherness
 ```js
 arraysOtherness<T>(
     // Array for checking
-    currentArray: T[], 
+    originArray: T[], 
     // Etalon array
     targetArray: T[], 
     // Function of matching arrays items
@@ -27,9 +27,9 @@ arraysOtherness<T>(
 ): {
     // Execute callback if items in two arrays
     match: (callback: (res) => void) => this,
-    // Execute callback if target item missing in current array
+    // Execute callback if target item missing in origin array
     missing: (callback: (res) => void) => this,
-    // Execute callback if current item is excess in target array
+    // Execute callback if origin item is excess in target array
     excess: (callback: (res) => void) => this,
 }
 ```
@@ -39,7 +39,7 @@ arraysOtherness<T>(
 ```js
 const arraysOtherness = require('arrays-otherness');
 
-const currentArray = [
+const originArray = [
     { id: 1, name: 'John' },
     { id: 2, name: 'Sam' },
     { id: 3, name: 'Nick' },
@@ -52,14 +52,23 @@ const targetArray = [
     { id: 5, name: 'Frank' },
 ];
 
-arraysOtherness(currentArray, targetArray, ({ current, target }) => (current.id === target.id))
-    .match(({ target, current }) => {
-        console.log('matched =', target, 'and', current);
+arraysOtherness(originArray, targetArray, ({ origin, target }) => (origin.id === target.id))
+    .match(({ target, origin }) => {
+        console.log('matched =', target, 'and', origin);
+        
+        // matched = { id: 1, name: 'John' } and { id: 1, name: 'Jonny' }
+        // matched = { id: 3, name: 'Nick' } and { id: 3, name: 'Nick' }
     })
     .missing(({ target }) => {
         console.log('to create =', target);
+
+        // to create = { id: 4, name: 'Lisa' }
+        // to create = { id: 5, name: 'Frank' }
     })
-    .excess(({ current }) => {
-        console.log('to delele =', current);
+    .excess(({ origin }) => {
+        console.log('to remove =', origin);
+
+        // to remove = { id: 2, name: 'Sam' }
     });
+
 ```
