@@ -1,5 +1,6 @@
 import assert from 'assert';
-import otherness, { ResultHandlers } from '../dist';
+import otherness from '../src';
+import { ResultHandlers } from '../src/types';
 
 type TestItem = {
   id: number
@@ -10,7 +11,7 @@ describe('arrays otherness', () => {
   let sync: ResultHandlers<TestItem>;
 
   before(() => {
-    const currentArray: TestItem[] = [
+    const originArray: TestItem[] = [
       { id: 1, name: 'John' },
       { id: 2, name: 'Sam' },
       { id: 3, name: 'Nick' },
@@ -24,16 +25,16 @@ describe('arrays otherness', () => {
     ];
 
     sync = otherness<TestItem>(
-      currentArray,
+      originArray,
       targetArray,
-      ({ current, target }) => (current.id === target.id),
+      ({ origin, target }) => (origin.id === target.id),
     );
   });
 
   it('should return exess items', () => {
     const result: TestItem[] = [];
-    sync.excess(({ current }) => {
-      result.push(current);
+    sync.excess(({ origin }) => {
+      result.push(origin);
     });
 
     assert.equal(result.length, 1);
@@ -42,8 +43,8 @@ describe('arrays otherness', () => {
 
   it('should return match items', () => {
     const result: TestItem[] = [];
-    sync.match(({ current }) => {
-      result.push(current);
+    sync.match(({ origin }) => {
+      result.push(origin);
     });
 
     assert.equal(result.length, 2);

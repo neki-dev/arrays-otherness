@@ -1,65 +1,73 @@
-import {
-  MatchCallback, Result, ResultCallback, ResultHandlers, ResultItems,
-} from './types';
+import { MatchCallback, RecordExcess, RecordMatch, RecordMissing, ResultHandlers } from './types';
 
 /**
  * Get a matching, missing and excess items of an array based on target array
  *
- * @param {Array} current - Current array
+ * @param {Array} origin - Origin array
  * @param {Array} target - Target array
  * @param {MatchCallback?} matchFn - Function of matching arrays items
  *
  * @returns {ResultHandlers}
  */
 export default function arraysOtherness<T = any>(
-  current: T[],
+  origin: T[],
   target: T[],
   matchFn?: MatchCallback<T>,
 ): ResultHandlers<T> {
-  const result: Result<T> = {
+  const result: {
+    excess: RecordExcess<T>[];
+    match: RecordMatch<T>[];
+    missing: RecordMissing<T>[];
+  } = {
     excess: [],
     match: [],
     missing: [],
   };
 
-  const defaultMathFn = (item: ResultItems<T>) => (item.target === item.current);
-  const match = matchFn || defaultMathFn;
+  const match = matchFn ?? function (record: { target: T; origin: T }) { 
+    return record.target === record.origin;
+  };
 
-  current.forEach((currentItem: T) => {
-    if (target.every((targetItem: T) => (
-      !match({ target: targetItem, current: currentItem })
+  origin.forEach((originRecord) => {
+    if (target.every((targetRecord) => (
+      !match({ target: targetRecord, origin: originRecord })
     ))) {
       result.excess.push({
-        current: currentItem,
+        origin: originRecord,
       });
     }
   });
 
-  target.forEach((targetItem: T) => {
-    const sameItem = current.find((currentItem: T) => (
-      match({ target: targetItem, current: currentItem })
+  target.forEach((targetRecord) => {
+    const sameRecord = origin.find((originRecord) => (
+      match({ target: targetRecord, origin: originRecord })
     ));
-    if (sameItem) {
+    if (sameRecord) {
       result.match.push({
-        current: sameItem,
-        target: targetItem,
+        origin: sameRecord,
+        target: targetRecord,
       });
     } else {
       result.missing.push({
-        target: targetItem,
+        target: targetRecord,
       });
     }
   });
 
-  const api = Object.keys(result).reduce((curr, type: keyof Result<T>) => ({
-    ...curr,
-    [type]: (callback: ResultCallback<T>): ResultHandlers<T> => {
-      Promise.all(result[type].map(callback));
-      return api;
+  const methods = {
+    excess: (callback: (record: RecordExcess<T>) => void) => {
+      Promise.all(result.excess.map(callback));
+      return methods;
     },
-  }), {} as ResultHandlers<T>);
+    match: (callback: (record: RecordMatch<T>) => void) => {
+      Promise.all(result.match.map(callback));
+      return methods;
+    },
+    missing: (callback: (record: RecordMissing<T>) => void) => {
+      Promise.all(result.missing.map(callback));
+      return methods;
+    },
+  };
 
-  return api;
+  return methods;
 }
-
-export * from './types';
